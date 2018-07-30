@@ -1,6 +1,20 @@
 var mongoose = require('mongoose');
 mongoose.set('debug', true);
-mongoose.connect('mongodb://localhost/todo-api')
+
+var uriString = process.env.MONGOLAB_URI ||
+process.env.MONGOHQ_URL;
+
+mongoose.connect(uriString, function(err, res) {
+  if (err) {
+      console.log ('ERROR connecting to: ' + uriString + '. ' + err);
+      } else {
+      console.log ('Succeeded connected to: ' + uriString);
+      }
+});
+//mongoose.connect('mongodb://localhost/todo-api')
+
+
+
 
 mongoose.Promise = Promise;
 
